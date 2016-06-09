@@ -1,18 +1,5 @@
 #tacta.rb
-require 'json'
-
-# getting contacts from json
-def read_contacts
-   json = File.read('contacts.json')
-   array = JSON.parse( json, { :symbolize_names => true } )
-end
-
-def write_contacts( contacts )
-   File.open( "contacts.json", "w" ) do |f|
-      json = JSON.pretty_generate( contacts )
-      f.write( json  )
-   end
-end
+require './contacts_file'
 
 # The program methods
 def index(contacts)
@@ -60,7 +47,6 @@ def action_show( contacts, i )
    puts
    show( contact )
    puts
-end
 
 def action_delete( contacts )
    puts
@@ -69,7 +55,6 @@ def action_delete( contacts )
    puts
    puts "Contact for #{contacts[i-1][:name]} deleted."
    contacts.delete_at( i-1 )
-
    write_contacts( contacts )
    puts
 end
